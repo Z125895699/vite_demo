@@ -2,7 +2,7 @@
  * @Author: zhangdi 1258956799@qq.com
  * @Date: 2023-05-21 21:10:24
  * @LastEditors: zhangdi 1258956799@qq.com
- * @LastEditTime: 2023-05-23 21:42:17
+ * @LastEditTime: 2023-06-04 11:21:54
  * @FilePath: /vite-project/vite.config.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -13,6 +13,9 @@ import autoprefixer from 'autoprefixer';
 import tailwindcss from 'tailwindcss';
 import svgr from 'vite-plugin-svgr';
 import viteImagemin from 'vite-plugin-imagemin';
+import vitePluginSemanticChunks from 'vite-plugin-semantic-chunks';
+import { myVitePlugin } from './plugins/my-plugin'
+import { testHookPlugin } from './plugins/test-hooks-plugin'
 
 const variablePath = path.resolve('./src/variable.scss');
 
@@ -70,7 +73,10 @@ export default defineConfig({
           }
         ]
       }
-    })
+    }),
+    vitePluginSemanticChunks(),
+    myVitePlugin('你好'),
+    testHookPlugin()
   ],
 
 
@@ -78,7 +84,8 @@ export default defineConfig({
   resolve: {
     // 别名配置
     alias: {
-      '@assets': path.join(__dirname, 'src/assets')
+      '@assets': path.join(__dirname, 'src/assets'),
+      '@': path.join(__dirname, 'src/')
     }
   },
 
